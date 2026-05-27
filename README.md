@@ -2,6 +2,7 @@
 
 [![Docker](https://img.shields.io/badge/Docker-✓-2496ED?logo=docker)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Active-brightgreen)]
 
 基于 Docker Compose 的云基础设施实验环境，用于学习和验证云计算核心技术。
 
@@ -43,6 +44,10 @@ docker compose ps
 3. **缓存集群** — 学习 Redis Sentinel 故障转移机制
 4. **可观测性** — 搭建企业级监控体系
 5. **网络架构** — 实践容器网络、跨子网通信
+
+## CI/CD
+
+本项目采用 Docker Compose 进行自动化测试验证。每个实验目录下的 `docker compose up -d` 可作为 CI 流水线中的集成测试步骤，验证各服务的容器启动、健康检查和基本连通性。通过 GitHub Actions 等 CI 平台可自动执行 `docker compose up -d` 后检查容器运行状态（`docker compose ps`），并在测试完成后执行 `docker compose down` 清理资源，实现无人值守的自动化实验环境验证。
 
 ## 使用场景
 
