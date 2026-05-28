@@ -1,75 +1,86 @@
-# Cloud Lab
+# Cloud Lab ☁️ 云基础设施实验平台
 
 [![Docker](https://img.shields.io/badge/Docker-✓-2496ED?logo=docker)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Active-brightgreen)]
+[![Status](https://img.shields.io/badge/Status-Active-brightgreen)]()
 
-基于 Docker Compose 的云基础设施实验环境，用于学习和验证云计算核心技术。
+> 基于 Docker Compose 的云基础设施实验环境，用于学习和验证云计算核心技术。
+> Docker Compose-based cloud infrastructure lab for learning and practicing core cloud technologies.
 
-## 实验环境
+## 实验环境 / Lab Modules
 
-| 实验 | 内容 | 目录 |
-|------|------|------|
-| 01-Nginx-LB | Nginx 负载均衡 + 多后端 | `lab01-nginx-lb/` |
-| 02-MySQL-Cluster | MySQL 主从复制 + 读写分离 | `lab02-mysql-cluster/` |
-| 03-Redis-HA | Redis Sentinel 高可用 | `lab03-redis-ha/` |
-| 04-Monitoring | Prometheus + Grafana 监控栈 | `lab04-monitoring/` |
-| 05-Network | 自定义 Docker 网络 + 多子网互联 | `lab05-network/` |
+| 实验 Lab | 内容 Content | 目录 |
+|-----------|-------------|------|
+| 01-Nginx-LB | Nginx 负载均衡 + 多后端 / Load balancing + multi-backend | `lab01-nginx-lb/` |
+| 02-MySQL-Cluster | MySQL 主从复制 + 读写分离 / Master-slave replication | `lab02-mysql-cluster/` |
+| 03-Redis-HA | Redis Sentinel 高可用 / High availability | `lab03-redis-ha/` |
+| 04-Monitoring | Prometheus + Grafana 监控栈 / Monitoring stack | `lab04-monitoring/` |
+| 05-Network | 自定义 Docker 网络 + 多子网互联 / Custom networks | `lab05-network/` |
 
-## 快速开始
+## 快速开始 / Quick Start
 
 ```bash
-# 克隆仓库
 git clone https://github.com/2281516753/cloud-lab.git
 cd cloud-lab
 
-# 启动某个实验
+# 启动某个实验 / Start a lab
 cd lab01-nginx-lb
 docker compose up -d
 
-# 查看运行状态
+# 查看运行状态 / Check status
 docker compose ps
 ```
 
-## 环境要求
+## 环境要求 / Requirements
 
 - Docker 20.10+
 - Docker Compose v2+
-- 至少 4GB 可用内存
+- 至少 4GB 可用内存 / 4GB+ RAM recommended
 
-## 学习路线
+## 学习路线 / Learning Path
 
-1. **负载均衡与反向代理** — 理解 L4/L7 负载均衡原理
-2. **数据库高可用** — 掌握主从复制、读写分离架构
-3. **缓存集群** — 学习 Redis Sentinel 故障转移机制
-4. **可观测性** — 搭建企业级监控体系
-5. **网络架构** — 实践容器网络、跨子网通信
+1. **负载均衡与反向代理** — 理解 L4/L7 负载均衡原理 / Understand L4/L7 load balancing
+2. **数据库高可用** — 掌握主从复制、读写分离架构 / Master-slave replication & read/write splitting
+3. **缓存集群** — 学习 Redis Sentinel 故障转移机制 / Redis Sentinel failover
+4. **可观测性** — 搭建企业级监控体系 / Build enterprise monitoring
+5. **网络架构** — 实践容器网络、跨子网通信 / Container networking & cross-subnet
 
 ## CI/CD
 
-本项目采用 Docker Compose 进行自动化测试验证。每个实验目录下的 `docker compose up -d` 可作为 CI 流水线中的集成测试步骤，验证各服务的容器启动、健康检查和基本连通性。通过 GitHub Actions 等 CI 平台可自动执行 `docker compose up -d` 后检查容器运行状态（`docker compose ps`），并在测试完成后执行 `docker compose down` 清理资源，实现无人值守的自动化实验环境验证。
+本项目采用 Docker Compose 进行自动化测试验证。每个实验目录下的 `docker compose up -d` 可作为 CI 流水线中的集成测试步骤，验证各服务的容器启动、健康检查和基本连通性。
 
-## 使用场景
+Each lab module supports CI integration: `docker compose up -d` → `docker compose ps` (health check) → `docker compose down` (cleanup).
 
-**场景一：准备面试时快速搭建负载均衡实验环境**
+## 使用场景 / Use Cases
 
-面试中常被问到 Nginx 反向代理、负载均衡算法、健康检查等知识点。只需进入 `lab01-nginx-lb/` 目录执行 `docker compose up -d`，即可获得一个包含 Nginx 负载均衡器和多个后端服务的完整实验环境，随时验证配置、观察轮询/加权等调度策略的实际效果。
+### 场景一：面试前快速搭建负载均衡实验环境
 
-**场景二：教学演示中一键拉起完整监控栈**
+面试中常被问到 Nginx 反向代理、负载均衡算法、健康检查等。进入 `lab01-nginx-lb/` 执行 `docker compose up -d`，即可获得完整实验环境。
 
-讲师或助教在课堂上演示可观测性概念时，无需繁琐的软件安装和环境配置。进入 `lab04-monitoring/` 目录，一条命令即可启动 Prometheus + Grafana 监控栈，直接展示指标采集、仪表盘可视化和告警规则的全流程，学生也可以在自己的机器上复现。
+### 场景二：教学演示中一键拉起监控栈
 
-**场景三：学习数据库高可用时零成本搭建 MySQL 主从集群**
+进入 `lab04-monitoring/`，一条命令启动 Prometheus + Grafana，直接展示指标采集与可视化全流程。
 
-MySQL 主从复制和读写分离是后端开发的必学内容。通过 `lab02-mysql-cluster/`，无需申请云资源或手动配置多台虚拟机，在本地 Docker 环境中即可模拟主库写入、从库同步、故障切换等场景，理解 binlog、复制延迟、数据一致性等核心概念。
+### 场景三：零成本学习 MySQL 高可用
 
-**场景四：验证容器网络原理时快速创建多子网互联拓扑**
+通过 `lab02-mysql-cluster/` 在本地 Docker 环境模拟主库写入、从库同步、故障切换。
 
-Docker 网络的 bridge、overlay、自定义子网等概念比较抽象。进入 `lab05-network/` 实验，自动创建多个自定义网络和子网，容器分布在不同网段中，可以通过 `docker exec` 进入容器实际测试跨子网连通性、DNS 解析和网络隔离效果。
+### 场景四：验证容器网络原理
 
-## 作者
+`lab05-network/` 自动创建多子网拓扑，可通过 `docker exec` 实际测试跨子网连通性。
 
-Wang Jiong — Network Engineering, cloud computing enthusiast.
+---
+
+### Quick Use Cases (EN)
+
+- **Interview prep**: One command to spin up Nginx load balancing lab
+- **Teaching**: Instant Prometheus + Grafana stack for demos
+- **MySQL HA**: Master-slave cluster simulation with zero cloud cost
+- **Networking**: Multi-subnet topology for hands-on container networking
+
+## Author
+
+Wang Jiong (王炯) — Network Engineering student, cloud computing enthusiast.
 
 ## License
 
