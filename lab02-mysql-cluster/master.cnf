@@ -1,0 +1,10 @@
+[mysqld]
+server-id = 1
+log-bin = mysql-bin
+binlog-format = ROW
+gtid_mode = ON
+enforce-gtid-consistency = ON
+
+# Replication user
+# CREATE USER 'repl'@'%' IDENTIFIED BY 'repl123';
+# GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%';

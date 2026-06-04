@@ -1,0 +1,66 @@
+version: "3.8"
+
+# Multi-Subnet Container Networking
+# Demonstrates cross-subnet communication and network isolation
+
+services:
+  # ── Subnet A (10.0.1.0/24) ──
+  web-a:
+    image: nginx:alpine
+    container_name: web-a
+    networks:
+      subnet-a:
+        ipv4_address: 10.0.1.10
+    volumes:
+      - ./html-a:/usr/share/nginx/html
+
+  client-a:
+    image: alpine:latest
+    container_name: client-a
+    command: tail -f /dev/null
+    networks:
+      subnet-a:
+        ipv4_address: 10.0.1.20
+
+  # ── Subnet B (10.0.2.0/24) ──
+  web-b:
+    image: nginx:alpine
+    container_name: web-b
+    networks:
+      subnet-b:
+        ipv4_address: 10.0.2.10
+    volumes:
+      - ./html-b:/usr/share/nginx/html
+
+  client-b:
+    image: alpine:latest
+    container_name: client-b
+    command: tail -f /dev/null
+    networks:
+      subnet-b:
+        ipv4_address: 10.0.2.20
+
+  # ── Router (connects both subnets) ──
+  router:
+    image: alpine:latest
+    container_name: router
+    command: tail -f /dev/null
+    networks:
+      subnet-a:
+        ipv4_address: 10.0.1.254
+      subnet-b:
+        ipv4_address: 10.0.2.254
+    cap_add:
+      - NET_ADMIN
+
+networks:
+  subnet-a:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.1.0/24
+  subnet-b:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.2.0/24
