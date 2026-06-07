@@ -1,8 +1,3 @@
-version: "3.8"
-
-# Multi-Subnet Container Networking
-# Demonstrates cross-subnet communication and network isolation
-
 services:
   # ── Subnet A (10.0.1.0/24) ──
   web-a:

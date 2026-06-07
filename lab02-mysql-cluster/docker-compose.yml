@@ -1,7 +1,3 @@
-version: "3.8"
-
-# MySQL Master-Slave Replication + ProxySQL Read/Write Splitting
-
 services:
   mysql-master:
     image: mysql:8.0
