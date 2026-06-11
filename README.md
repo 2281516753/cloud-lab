@@ -17,6 +17,7 @@ Docker Compose-based cloud infrastructure lab for learning core cloud technologi
 | 03-Redis-HA | Redis Sentinel high availability (1M+2R+3S) | `lab03-redis-ha/` | ✅ Done |
 | 04-Monitoring | Prometheus + Grafana monitoring stack | `lab04-monitoring/` | ✅ Done |
 | 05-Network | Custom Docker networks + multi-subnet | `lab05-network/` | ✅ Done |
+| 06-PostgreSQL | PostgreSQL streaming replication + pgAdmin | `lab06-postgresql/` | ✅ Done |
 
 ## Quick Start
 

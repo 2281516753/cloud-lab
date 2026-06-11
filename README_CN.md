@@ -17,6 +17,7 @@
 | 03-Redis-HA | Redis Sentinel 高可用（1主2从3哨兵） | `lab03-redis-ha/` | ✅ 完成 |
 | 04-Monitoring | Prometheus + Grafana 监控栈 | `lab04-monitoring/` | ✅ 完成 |
 | 05-Network | 自定义 Docker 网络 + 多子网互联 | `lab05-network/` | ✅ 完成 |
+| 06-PostgreSQL | PostgreSQL 流复制 + pgAdmin | `lab06-postgresql/` | ✅ 完成 |
 
 ## 快速开始
 
